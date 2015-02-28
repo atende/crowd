@@ -1,6 +1,8 @@
-# Atlassian SOFTWARE_NAME
+# Atlassian Crowd
 
-Description of the software
+A single sign-on and user identity tool that's easy to use, administer, and integrate.
+
+Users can come from anywhere: Active Directory, LDAP, Crowd itself, or any mix thereof. Control permissions to all your applications in one place – Atlassian, Subversion, Google Apps, or your own apps.
 
 This is inspired by [Hbokh/docker-jira-postgresql](https://github.com/hbokh/docker-jira-postgresql)
 but the installation and run process is made in a more generic way, to serve as base
@@ -11,11 +13,11 @@ for the installation of other Atlassian Products.
 Is best practice to separate the data from the container. This instalation process
 will assume this.
 
-### 1. Create a data-only container for SOFTWARE_NAME
+### 1. Create a data-only container for crowd
 
-Create a data-only container from Busybox (very small footprint) and name it "SOFTWARE_NAME\_datastore":
+Create a data-only container from Busybox (very small footprint) and name it "crowd\_datastore":
 
-    docker run -v /opt/crowd-home --name=SOFTWARE_NAME\_datastore -d busybox echo "SOFTWARE_NAME data"
+    docker run -v /opt/crowd-home --name=crowd\_datastore -d busybox echo "crowd data"
 
 **NOTE**: data-only containers don't have to run / be active to be used.
 
@@ -25,8 +27,8 @@ See: [POSTGRESQL](POSTGRESQL.md)
 
 ### 3. Start the Software container
 
-    docker run -d --name SOFTWARE_NAME -p 8085:8085 --link postgresql:db atende/SOFTWARE_NAME \
-    --volumes-from SOFTWARE_NAME\_datastore
+    docker run -d --name crowd -p 8085:8085 --link postgresql:db atende/crowd \
+    --volumes-from crowd\_datastore
 
 ## Running Behind a Proxy
 
